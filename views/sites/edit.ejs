@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Trips in Vietman</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="container">
+      <%- include('../partials/navbar') %>
+      <div class="container">
+        <div class="jumbotron">
+          <h1 class="display-4">Welcome to Vietman</h1>
+          <p class="lead">This site shows you the beautiful tourist attractions and their reviews in Vietnam</p>
+          <hr class="my-4">
+          <div class="card" style="width: 12rem;">
+            <img class="card-img-top" src="https://cdn3.iconfinder.com/data/icons/shiba-inu-dog-emoji-1/500/Angry_shiba_inu_dog_emoticon_1-512.png" alt="Card image cap">
+            <div class="card-body">
+              <h3>About Me: </h3>
+              <p class="card-text">Hello, I am Hoang</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="container">
+        <form method="POST" action="/sites/<%= site.id %>">
+            <div class="mb-3">
+                <label for="name" class="form-label">Site Name</label>
+                <input type="text" class="form-control" name="name" value="<%= site.name %>" />
+              </div>
+            <div class="mb-3">
+              <label for="description">Description</label>
+              <textarea class="form-control" name="description" rows="3"><%= site.description %></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+          </form>
+      </div>
+      <%- include('../partials/footer') %>
+    </div>
+  </body>
+  </html>

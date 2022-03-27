@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Trips in Vietman</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="container">
+      <%- include('../partials/navbar') %>
+      <div class="container">
+        <div class="jumbotron">
+          <h1 class="display-4">Welcome to Vietman</h1>
+          <p class="lead">This site shows you the beautiful tourist attractions and their reviews in Vietnam</p>
+          <hr class="my-4">
+          <div class="card" style="width: 12rem;">
+            <img class="card-img-top" src="https://cdn3.iconfinder.com/data/icons/shiba-inu-dog-emoji-1/500/Angry_shiba_inu_dog_emoticon_1-512.png" alt="Card image cap">
+            <div class="card-body">
+              <h3>About Me: </h3>
+              <p class="card-text">Hello, I am Hoang</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container" id="site-div">
+        <div class="card">
+          <div class="card-header">
+            <%= site.name %>
+          </div>
+          <div class="card-body">
+            <p class="card-text"><%= site.description %></p>
+            <% if (user) { %>
+              <a href="/sites/<%= site.id %>/edit" class="btn btn-primary">Edit</a>
+            <% } %>
+          </div>
+        </div>
+          <% if (!user) { %>
+            <h3>Please log in to add reviews...</h3>
+          <% } else { %>
+            <h3>Add a Review</h3>
+            <form method="POST" action="/sites/<%= site._id %>/reviews">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="title" class="form-label">Title</label>
+                  <input type="text" class="form-control" name="title">
+                </div>
+                <div class="col-md-6">
+                  <label for="stars" class="form-label">Stars</label>
+                  <select name="stars" class="form-control">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="content">Comment</label>
+                <textarea class="form-control" name="content" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            </form>
+          <% } %>
+      </div>
+      <br>
+      <div id="reviews-div" class="container">
+        <% if (!site.reviews || site.reviews.length == 0) { %>
+          <h3>No Reviews</h3> 
+        <% } else { %>
+          <h3>Reviews</h3>
+          <% site.reviews.forEach(r => { %>
+            <div class="card">
+              <div class="card-header row">
+                <div class="col"><h5 class="card-title"><%= r.title %></h5></div>
+                <div class="col"><h6 class="card-title"><%= r.stars %> Stars</h6></div>
+                <div class="col">
+                  <% if (user && r.user.id == user.id) { %>
+                    <form class="delete-form" method="POST" action="/sites/<%= site.id %>/reviews/<%= r.id %>?_method=DELETE">
+                      <button type="submit" >X</button>
+                    </form>
+                  <% } %>
+                </div>
+              </div>
+              <div class="card-body">
+                <p class="card-text"><%= r.content %></p>
+                <p class="card-text">-- by <%= r.user.name %></p>
+              </div>
+            </div>
+          <% })%>
+        <% } %>
+      </div>
+      <%- include('../partials/footer') %>
+    </div>
+  </body>
+  </html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Trips in Vietman</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="container">
+      <%- include('partials/navbar') %>
+      <div class="container">
+        <div class="jumbotron">
+          <h1 class="display-4">Welcome to Vietman</h1>
+          <p class="lead">This site shows you the beautiful tourist attractions and their reviews in Vietnam</p>
+          <hr class="my-4">
+          <div class="card" style="width: 12rem;">
+            <img class="card-img-top" src="https://cdn3.iconfinder.com/data/icons/shiba-inu-dog-emoji-1/500/Angry_shiba_inu_dog_emoticon_1-512.png" alt="Card image cap">
+            <div class="card-body">
+              <h3>About Me: </h3>
+              <p class="card-text">Hello, I am Hoang</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <% if (!user) { %>
+          <h3>Please login to add new tourist attractions...</h3>
+        <% } else { %>
+          <a class="btn btn-primary" href="/sites/new">Add a Site</a>
+        <% } %>
+      </div>
+      <br>
+      <div id="sites-div">
+        <% sites.forEach(site => { %>
+          <div class="card">
+            <div class="card-header">
+              <%= site.name %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="space-span">[<%= site.rating %> Star(s)]</span>
+            </div>
+            <div class="card-body">
+              <p class="card-text"><%= site.description %></p>
+              <a href="sites/<%= site.id %>" class="btn btn-primary">View Details</a>
+            </div>
+          </div>
+       <% }) %>
+      </div>
+      <%- include('partials/footer') %>
+    </div>
+
+    <script src="/js/jquery.min.js" ></script>
+  </body>
+</html>

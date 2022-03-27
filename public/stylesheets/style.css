@@ -1,0 +1,32 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.footer {
+  background-color: black;
+  min-height: 12rem;
+}
+
+.jumbotron {
+  background-image: url("https://www.goway.com/media/cache/63/84/6384e36c5d8aa3b7a69dd8b7d4343872.jpg");
+  background-size: cover;
+}
+
+.space-span {
+  display: inline-block;
+  width: 8rem;
+}
+
+#sites-div {
+  max-width: 80%;
+  margin-left: 10%;
+}
+
+.delete-form button {
+  color: red;
+}
